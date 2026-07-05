@@ -51,27 +51,19 @@ const productos=[
 ]
 
 function listarProductos(){
-    productos.forEach(producto => {
-        console.log(`ID: ${producto.id} - Nombre: ${producto.nombre} - Precio: ${producto.precio} - Categoria: ${producto.categoria} - Stock: ${producto.stock}`);
-        return productos;
-    });
+    return productos;  //devuelve un array con todos los productos
 }
+
 
 function buscarProductoPorId(id){
     const producto = productos.find(producto => producto.id === id);
-    if(producto === undefined){
+    if(!producto){
         console.log("Producto no encontrado");
+        return null;
     }else{
         console.log(`ID: ${producto.id} - Nombre: ${producto.nombre} - Precio: ${producto.precio} - Categoria: ${producto.categoria} - Stock: ${producto.stock}`);
+        return producto;
     }
-}
-
-function filtarProductosPorCategoria(categoria){
-    const productosFiltrados = productos.filter(producto => producto.categoria === categoria);
-    productosFiltrados.forEach(producto => {
-        console.log(`ID: ${producto.id} - Nombre: ${producto.nombre} - Precio: ${producto.precio} - Categoria: ${producto.categoria} - Stock: ${producto.stock}`);
-    })
-    console.log(`Total de productos filtrados: ${productosFiltrados.length}`);
 }
 
 function filtarProductosPorCategoria(categoria){
@@ -87,44 +79,38 @@ function crearProducto(nombre, precio, categoria, stock){
         precio,
         categoria,
         stock
-    }
-    productos.push(producto);  //push() agrega un elemento al final del array
+    };
+    productos.push(producto);
     console.log("El producto se ha creado correctamente");
-    console.log(`ID: ${producto.id} - Nombre: ${producto.nombre} - Precio: ${producto.precio} - Categoria: ${producto.categoria} - Stock: ${producto.stock}`);
+    return producto;
 }
+
 
 function actualizarProducto(id, datosActualizados){
     const producto = productos.find(producto => producto.id === id);
-    if(producto === undefined){
+    if(!producto){  //el ! es un operador de negación, lo que significa que si el producto no existe, devuelve null
         console.log("Producto no encontrado");
-        return;
+        return null;
     }
     else{
         Object.assign(producto, datosActualizados);  //Object.assign() permite actualizar las propiedades de un objeto con las propiedades de otro objeto
         console.log("El producto se ha actualizado correctamente");
-        console.log(`ID: ${producto.id} - Nombre: ${producto.nombre} - Precio: ${producto.precio} - Categoria: ${producto.categoria} - Stock: ${producto.stock}`);
+        return producto;  //devuelve el producto actualizado
     }
 }
 
 function eliminarProducto(id){
     const producto = productos.find(producto => producto.id === id);
-    if(producto === undefined){
+    if(!producto){
         console.log("Producto no encontrado");
-        return;
+        return null;
     }
     else{
         const productoIndex = productos.indexOf(producto);
         productos.splice(productoIndex, 1);   //el splice elimina el producto del array
         console.log("El producto se ha eliminado correctamente");
+        return producto;  //devuelve el producto eliminado
     }
-}
-
-function calcularValorTotalInventario(){
-    let valorTotalInventario = 0;
-    productos.forEach(producto => {
-        valorTotalInventario += producto.precio * producto.stock;
-    });
-    console.log(`El valor total del inventario es de ${valorTotalInventario}`);
 }
 
 function calcularValorTotalInventario() {
@@ -132,8 +118,5 @@ function calcularValorTotalInventario() {
         return total + producto.precio * producto.stock;
     }, 0);  //el cero es el valor inicial, el reduce() llama a la función de acuerdo a cada elemento del array, y devuelve el resultado final
 }
-
-
-
 
 
