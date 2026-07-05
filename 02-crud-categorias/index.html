@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta title="CRUD Categorias">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>CRUD Categorias</h1>
+    <div class="container">
+        <div class="form">
+            <h2>Agregar Categoria</h2>
+            <form id="formCategoria" action="#" method="post">
+                <label for="selectCategorias">Seleccionar categoría existente:</label>
+                <select id="selectCategorias">
+                    <option value="">-- Nueva categoría --</option>
+                </select>
+
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre de la Categoria">
+
+                <label for="descripcion">Descripción:</label>
+                <input type="text" id="descripcion" name="descripcion" placeholder="Descripción (opcional)">
+
+                <input type="hidden" id="categoriaId" value="">
+
+                <div style="display:flex; gap:8px; margin-top:8px;">
+                    <button id="agregarCategoria" type="submit">Guardar</button>
+                    <button id="cancelEdit" type="button">Cancelar</button>
+                </div>
+            </form>
+        </div>
+        <div class="lista">
+            <h2>Lista de Categorias</h2>
+            <ul id="listaCategorias"></ul>
+        </div>
+    </div>
+</body>
+</html>

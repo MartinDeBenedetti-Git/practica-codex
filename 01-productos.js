@@ -71,14 +71,14 @@ function filtarProductosPorCategoria(categoria){
 }                                                                           //el filter() devuelve un array con los elementos que cumplen la condición, en este caso, los productos que pertenecen a la categoría especificada
 
 
-function crearProducto(nombre, precio, categoria, stock){
+function crearProducto(datosProducto){
     const nuevoID = productos.length + 1;
     const producto = {
         id: nuevoID,
-        nombre,
-        precio,
-        categoria,
-        stock
+        nombre: datosProducto.nombre,
+        precio: datosProducto.precio,
+        categoria: datosProducto.categoria,
+        stock: datosProducto.stock
     };
     productos.push(producto);
     console.log("El producto se ha creado correctamente");
@@ -94,7 +94,6 @@ function actualizarProducto(id, datosActualizados){
     }
     else{
         Object.assign(producto, datosActualizados);  //Object.assign() permite actualizar las propiedades de un objeto con las propiedades de otro objeto
-        console.log("El producto se ha actualizado correctamente");
         return producto;  //devuelve el producto actualizado
     }
 }
