@@ -64,6 +64,26 @@ function eliminarCategoria(id){
     }
 }
 
-buttonAgregar.addEventListener("click", agregarCategoria);
-buttonEliminar.addEventListener("click", eliminarCategoria);
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const nombre = inputNombre.value.trim();
+    const descripcion = inputDescripcion.value.trim();
+
+    if (nombre === '') {
+        return;
+    }
+
+    crearCategoria({
+        nombre: nombre,
+        descripcion: descripcion
+    });
+
+    inputNombre.value = '';
+    inputDescripcion.value = '';
+
+    renderizarCategorias();
+});
+
+renderizarCategorias();
 
