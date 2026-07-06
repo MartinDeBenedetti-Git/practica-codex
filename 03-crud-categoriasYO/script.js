@@ -12,23 +12,37 @@ const inputNombre = document.querySelector('#nombre'); // input nombre
 const inputDescripcion = document.querySelector('#descripcion');
 
 function renderizarCategorias() {
-    listaCategorias.innerHTML = ''; // limpio la lista actual
-    categorias.forEach((categoria) => { // recorro cada categoria
-        const li = document.createElement('li'); // creo elemento li
-        li.textContent = categoria.nombre; // pongo el nombre
-        listaCategorias.appendChild(li); // agrego a la lista
+    listaCategorias.innerHTML = '';
 
-        const buttonEliminar = document.createElement('button'); // botón eliminar
-        buttonEliminar.type = 'button'; // evito submit
-        buttonEliminar.textContent = 'Eliminar'; // texto del botón
-        buttonEliminar.addEventListener('click', () => eliminarCategoria(categoria.id)); // asocio borrado
-        li.appendChild(buttonEliminar); // añado eliminar a li
+    categorias.forEach((categoria) => {
+        const li = document.createElement('li');
 
-        const buttonEditar = document.createElement('button'); // botón editar
-        buttonEditar.type = 'button'; // evito submit
-        buttonEditar.textContent = 'Editar'; // texto del botón
-        buttonEditar.addEventListener('click', () => editarCategoria(categoria.id)); // asocio borrado
-        li.appendChild(buttonEditar); // añado editar a li
+        const nombreCategoria = document.createElement('span');
+        nombreCategoria.textContent = categoria.nombre;
+
+        const buttonEliminar = document.createElement('button');
+        buttonEliminar.type = 'button';
+        buttonEliminar.textContent = 'Eliminar';
+        buttonEliminar.addEventListener('click', () => {
+            eliminarCategoria(categoria.id);
+            guardarCategorias();
+            renderizarCategorias();
+        });
+
+        const buttonEditar = document.createElement('button');
+        buttonEditar.type = 'button';
+        buttonEditar.textContent = 'Editar';
+        buttonEditar.addEventListener('click', () => {
+            editarCategoria(categoria.id);
+            guardarCategorias();
+            renderizarCategorias();
+        });
+
+        li.appendChild(nombreCategoria);
+        li.appendChild(buttonEliminar);
+        li.appendChild(buttonEditar);
+
+        listaCategorias.appendChild(li);
     });
 }
 
@@ -64,7 +78,7 @@ function eliminarCategoria(id){
     }
     else{
         const categoriaIndex = categorias.indexOf(categoria);
-        categorias.splice(categoriaIndex, 1);   //el splice elimina el producto del array
+        categorias.remove(categoriaIndex);   //el splice elimina el producto del array
         console.log("La categoria se ha eliminado correctamente");
         return categoria;  //devuelve el producto eliminado
     }
@@ -101,10 +115,13 @@ form.addEventListener('submit', function(event) {
 
     inputNombre.value = '';
     inputDescripcion.value = '';
-
+    guardarCategorias();
     renderizarCategorias();
 });
 renderizarCategorias();
 
-
+// Guarda el array de categorías en localStorage
+function guardarCategorias() {
+  localStorage.setItem('categorias', JSON.stringify(categorias)); // serializa y guarda
+}
 
