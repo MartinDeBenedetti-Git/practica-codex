@@ -1,21 +1,15 @@
 // Lista de productos de ejemplo (ya existía en tu proyecto)
-const categorias = [
-  { id: 1, nombre: "Notebook Lenovo", precio: 50000, categoria: "Notebook", stock: 10 }, // producto 1
-  { id: 2, nombre: "Colchon Simmons", precio: 80000, categoria: "Colchones", stock: 5 }, // producto 2
-  { id: 3, nombre: "Silla Ergonomica", precio: 30000, categoria: "Sillas", stock: 15 }, // producto 3
-  { id: 4, nombre: "Play Station 5", precio: 60000, categoria: "Consolas", stock: 5 }, // producto 4
-  { id: 5, nombre: "Xbox Series X", precio: 55000, categoria: "Consolas", stock: 5 }, // producto 5
-  { id: 6, nombre: "Lavarropas Samsung", precio: 100000, categoria: "Lavarropas", stock: 10 }, // producto 6
-  { id: 7, nombre: "Heladera Whirlpool", precio: 120000, categoria: "Heladeras", stock: 10 }, // producto 7
-]; // fin array productos
+let categorias = [
+  { id: 1, nombre: "Notebook", descripcion: "" },
+  { id: 2, nombre: "Colchones", descripcion: "" },
+  { id: 3, nombre: "Consolas", descripcion: "" }
+]; // fin array categorias
 
 // Selecciono elementos del DOM necesarios
 const form= document.querySelector('#formCategoria'); // formulario general
 const listaCategorias = document.querySelector('#listaCategorias'); // lista donde muestro categorías
 const inputNombre = document.querySelector('#nombre'); // input nombre
 const inputDescripcion = document.querySelector('#descripcion');
-const buttonAgregar = document.querySelector('#agregarCategoria'); 
-const buttonEliminar = document.querySelector('#eliminarCategoria');
 
 function renderizarCategorias() {
     listaCategorias.innerHTML = ''; // limpio la lista actual
@@ -23,6 +17,18 @@ function renderizarCategorias() {
         const li = document.createElement('li'); // creo elemento li
         li.textContent = categoria.nombre; // pongo el nombre
         listaCategorias.appendChild(li); // agrego a la lista
+
+        const buttonEliminar = document.createElement('button'); // botón eliminar
+        buttonEliminar.type = 'button'; // evito submit
+        buttonEliminar.textContent = 'Eliminar'; // texto del botón
+        buttonEliminar.addEventListener('click', () => eliminarCategoria(categoria.id)); // asocio borrado
+        li.appendChild(buttonEliminar); // añado eliminar a li
+
+        const buttonEditar = document.createElement('button'); // botón editar
+        buttonEditar.type = 'button'; // evito submit
+        buttonEditar.textContent = 'Editar'; // texto del botón
+        buttonEditar.addEventListener('click', () => editarCategoria(categoria.id)); // asocio borrado
+        li.appendChild(buttonEditar); // añado editar a li
     });
 }
 
@@ -64,6 +70,20 @@ function eliminarCategoria(id){
     }
 }
 
+function editarCategoria(id){
+    const categoria = categorias.find(categoria => categoria.id === id);
+    if(!categoria){
+        return null;
+    }
+    else{
+        const nombre = prompt("Ingrese el nuevo nombre de la categoria");
+        if(nombre){
+            actualizarCategoria(id, {nombre});
+        }
+        return categoria;
+    }
+}
+
 form.addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -84,6 +104,7 @@ form.addEventListener('submit', function(event) {
 
     renderizarCategorias();
 });
-
 renderizarCategorias();
+
+
 
