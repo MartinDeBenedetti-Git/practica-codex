@@ -108,7 +108,8 @@ button.addEventListener("click", event => {
 const formEliminar = document.getElementById("eliminarProducto");
 
 const eliminarProducto = formEliminar => {
-    const id = formEliminar.id.value;
+    event.preventDefault();
+    const id = formEliminar.id.valueAsNumber;
     const index = productos.findIndex(producto => producto.id === id);
     productos.splice(index, 1);
     renderizarProductos();
@@ -118,6 +119,7 @@ const eliminarProducto = formEliminar => {
 
 const buttonEliminar = document.getElementById("EliminarProducto");
 buttonEliminar.addEventListener("click", event => {
+    event.preventDefault();
     const id = eliminarProducto(formEliminar);
     formEliminar.reset();
 });
