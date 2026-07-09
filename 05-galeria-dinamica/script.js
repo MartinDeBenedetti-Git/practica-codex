@@ -54,9 +54,10 @@ const listarProductos=()=>{
     return productos;  //devuelve un array con todos los productos
 }
 
-const renderizarProductos=()=>{
+const renderizarProductos=(lista=productos)=>{
     const contenedor = document.querySelector(".contenedor");
-    productos.forEach(producto=>{
+    contenedor.innerHTML = "";
+    lista.forEach(producto => {
         const productoElemento = document.createElement("article");
         productoElemento.classList.add("producto");
         productoElemento.innerHTML = `
@@ -64,9 +65,9 @@ const renderizarProductos=()=>{
             <p>id:${producto.id}, nombre:${producto.nombre}, precio:${producto.precio}, categoria:${producto.categoria}, stock:${producto.stock}</p>
         `;
         contenedor.appendChild(productoElemento);
-    })
-}
-renderizarProductos();
+    });
+};
+renderizarProductos(listarProductos());
 
 const buscarProducto = document.getElementById("buscarProducto");
 
@@ -77,7 +78,7 @@ buscarProducto.addEventListener("input", event => {
     renderizarProductos(productosFiltrados);
 });
 
-const button = document.getElementById("AgregarCategoria");
+const button = document.getElementById("AgregarProducto");
 const formProducto = document.getElementById("formProducto");
 
 
@@ -100,7 +101,6 @@ const agregarProducto = formProducto => {
 
 button.addEventListener("click", event => {
     const nuevoProducto = agregarProducto(formProducto);
-    renderizarProductos();
 });
 
 
