@@ -1,0 +1,20 @@
+div.contenedor{
+    display: flex;
+    flex-flow: row wrap;
+    flex-basis: 100%;
+    gap: 16px;
+    margin: 8px;
+    padding: 8px;
+}
+
+article.producto{
+    width: 300px;
+    height: 300px;
+    border: 1px solid black;
+    padding: 8px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
