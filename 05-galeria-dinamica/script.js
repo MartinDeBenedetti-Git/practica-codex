@@ -83,6 +83,7 @@ const formProducto = document.getElementById("formProducto");
 
 
 const agregarProducto = formProducto => {
+    event.preventDefault();
     const nombre = formProducto.nombre.value;
     const categoriaId = formProducto.categoriaId.value;
     const precio = formProducto.precio.value;
@@ -111,15 +112,20 @@ const eliminarProducto = formEliminar => {
     event.preventDefault();
     const id = formEliminar.id.valueAsNumber;
     const index = productos.findIndex(producto => producto.id === id);
-    productos.splice(index, 1);
-    renderizarProductos();
-    console.log("El producto se ha eliminado correctamente");
-    return id;
+    if (index === -1) {
+        console.log("El producto no existe");
+            return;
+    }
+    else {
+        productos.splice(index, 1);
+        renderizarProductos();
+        console.log("El producto se ha eliminado correctamente");
+        return id;
+    }
 };
 
 const buttonEliminar = document.getElementById("EliminarProducto");
 buttonEliminar.addEventListener("click", event => {
-    event.preventDefault();
     const id = eliminarProducto(formEliminar);
     formEliminar.reset();
 });
