@@ -78,7 +78,7 @@ function eliminarCategoria(id){
     }
     else{
         const categoriaIndex = categorias.indexOf(categoria);
-        categorias.remove(categoriaIndex);   //el splice elimina el producto del array
+        categorias.splice(categoriaIndex, 1);   //el splice elimina el producto del array
         console.log("La categoria se ha eliminado correctamente");
         return categoria;  //devuelve el producto eliminado
     }
@@ -118,10 +118,17 @@ form.addEventListener('submit', function(event) {
     guardarCategorias();
     renderizarCategorias();
 });
+cargarCategorias();
 renderizarCategorias();
 
 // Guarda el array de categorías en localStorage
 function guardarCategorias() {
   localStorage.setItem('categorias', JSON.stringify(categorias)); // serializa y guarda
 }
-
+// Carga el array de categorías desde localStorage
+function cargarCategorias(){
+    const datos = localStorage.getItem('categorias');
+    if(datos){
+        categorias = JSON.parse(datos);
+    }   
+}
