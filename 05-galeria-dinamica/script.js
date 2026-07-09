@@ -77,17 +77,32 @@ buscarProducto.addEventListener("input", event => {
     renderizarProductos(productosFiltrados);
 });
 
+const button = document.getElementById("AgregarCategoria");
+const formProducto = document.getElementById("formProducto");
+
+
+const agregarProducto = formProducto => {
+    const nombre = formProducto.nombre.value;
+    const descripcion = formProducto.descripcion.value;
+    const categoriaId = formProducto.categoriaId.value;
+    const nuevoProducto = {
+        id: productos.length + 1,
+        nombre: nombre,
+        precio: 0,
+        categoria: categoriaId,
+        stock: 0
+    };
+    productos.push(nuevoProducto);
+    renderizarProductos();
+    console.log("El producto se ha creado correctamente");
+    return nuevoProducto;
+};
+
 button.addEventListener("click", event => {
-    const producto = productos.find(producto => producto.id === id);
-    if(!producto){
-        console.log("Producto no encontrado");
-        return null;
-    }
-    else{
-        console.log(`ID: ${producto.id} - Nombre: ${producto.nombre} - Precio: ${producto.precio} - Categoria: ${producto.categoria} - Stock: ${producto.stock}`);
-        return producto;
-    }
+    const nuevoProducto = agregarProducto(formProducto);
+    renderizarProductos();
 });
+
 
 
 
