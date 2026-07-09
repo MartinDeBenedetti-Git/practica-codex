@@ -84,14 +84,15 @@ const formProducto = document.getElementById("formProducto");
 
 const agregarProducto = formProducto => {
     const nombre = formProducto.nombre.value;
-    const descripcion = formProducto.descripcion.value;
     const categoriaId = formProducto.categoriaId.value;
+    const precio = formProducto.precio.value;
+    const stock = formProducto.stock.value;
     const nuevoProducto = {
         id: productos.length + 1,
         nombre: nombre,
-        precio: 0,
+        precio: precio,
         categoria: categoriaId,
-        stock: 0
+        stock:  stock
     };
     productos.push(nuevoProducto);
     renderizarProductos();
@@ -101,6 +102,7 @@ const agregarProducto = formProducto => {
 
 button.addEventListener("click", event => {
     const nuevoProducto = agregarProducto(formProducto);
+    renderizarProductos();
 });
 
 
