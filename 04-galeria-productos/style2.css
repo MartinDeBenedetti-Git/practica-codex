@@ -4,6 +4,7 @@ div.contenedor{
     flex-basis: 100%;
     grid-gap: 16px;
     grid-auto-rows: minmax(200px, auto);
+    margin: 8px;
 }
 
 article.producto{
