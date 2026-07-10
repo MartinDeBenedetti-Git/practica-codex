@@ -83,7 +83,6 @@ const formProducto = document.getElementById("formProducto");
 
 
 const agregarProducto = formProducto => {
-    event.preventDefault();
     const nombre = formProducto.nombre.value;
     const categoriaId = formProducto.categoriaId.value;
     const precio = formProducto.precio.value;
@@ -127,6 +126,7 @@ const eliminarProducto = formEliminar => {
 
 const buttonEliminar = document.getElementById("EliminarProducto");
 buttonEliminar.addEventListener("click", event => {
+    event.preventDefault();
     const id = eliminarProducto(formEliminar);
     formEliminar.reset();
 });
