@@ -102,6 +102,7 @@ const agregarProducto = formProducto => {
 };
 
 button.addEventListener("click", event => {
+    event.preventDefault();
     const nuevoProducto = agregarProducto(formProducto);
     formProducto.reset();
 });
@@ -114,7 +115,7 @@ const eliminarProducto = formEliminar => {
     const index = productos.findIndex(producto => producto.id === id);
     if (index === -1) {
         console.log("El producto no existe");
-            return;
+        return;
     }
     else {
         productos.splice(index, 1);
