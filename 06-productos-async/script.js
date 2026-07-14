@@ -1,6 +1,6 @@
-const productos=[]
+let productos=[]
 
-const obtenerProductos = async =>{   //la funcion que trae los datos es async porque se necesita una petición ajax
+const obtenerProductos = async() =>{   //la funcion que trae los datos es async porque se necesita una petición ajax
     mostrarCargando();  //se muestra un mensaje de cargando en el DOM mientras se obtiene los datos
 
     try{
@@ -15,10 +15,23 @@ const obtenerProductos = async =>{   //la funcion que trae los datos es async po
         console.log("Productos obtenidos correctamente");
     }
     catch(error){
-        mostarError(error);
+        mostrarError(error);  //se muestra un mensaje de error en el DOM
     }
 };
 obtenerProductos();  //se llama una vez cargada la página
+
+const mostrarCargando = () => {
+    const mensaje= document.createElement("p");
+    mensaje.innerText = "Cargando...";
+    document.querySelector("main").appendChild(mensaje);
+};
+
+const mostrarError = (error) => {
+    const mensaje= document.createElement("p");
+    mensaje.innerText = `Error: ${error.message}`;
+    document.querySelector("main").appendChild(mensaje);
+};
+
 
 const listarProductos=()=>{
     return productos;  //devuelve un array con todos los productos
