@@ -18,12 +18,12 @@ const obtenerProductos = async() =>{   //la funcion que trae los datos es async 
         mostrarError(error);  //se muestra un mensaje de error en el DOM
     }
 };
-obtenerProductos();  //se llama una vez cargada la página
 
 const mostrarCargando = () => {
     const mensaje= document.createElement("p");
     mensaje.innerText = "Cargando...";
     document.querySelector("main").appendChild(mensaje);
+    innerHTML = "";
 };
 
 const mostrarError = (error) => {
@@ -32,6 +32,7 @@ const mostrarError = (error) => {
     document.querySelector("main").appendChild(mensaje);
 };
 
+obtenerProductos();  //se llama una vez cargada la página
 
 const listarProductos=()=>{
     return productos;  //devuelve un array con todos los productos
