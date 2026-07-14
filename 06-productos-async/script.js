@@ -1,7 +1,7 @@
 let productos=[]
 
 const obtenerProductos = async() =>{   //la funcion que trae los datos es async porque se necesita una petición ajax
-    mostrarCargando();  //se muestra un mensaje de cargando en el DOM mientras se obtiene los datos
+    mostrarCargando()  //se muestra un mensaje de cargando en el DOM mientras se obtiene los datos
 
     try{
         const respuesta = await fetch("https://fakestoreapi.com/products")  //se hace la petición 
@@ -12,18 +12,25 @@ const obtenerProductos = async() =>{   //la funcion que trae los datos es async 
         const datos = await respuesta.json();  //se obtiene el json
         productos = datos;
         renderizarProductos(productos);
-        console.log("Productos obtenidos correctamente");
+        ocultarCargando();
     }
     catch(error){
+        ocultarCargando();
         mostrarError(error);  //se muestra un mensaje de error en el DOM
     }
 };
 
 const mostrarCargando = () => {
-    const mensaje= document.createElement("p");
-    mensaje.innerText = "Cargando...";
-    document.querySelector("main").appendChild(mensaje);
-    innerHTML = "";
+    mensajeCargando = document.createElement("p");
+    mensajeCargando.innerText = "Cargando...";
+    document.querySelector("main").appendChild(mensajeCargando);  //se agrega el mensaje al DOM
+};
+
+const ocultarCargando = () => {
+    if(mensajeCargando){
+        mensajeCargando.remove();
+        mensajeCargando = null;
+    }
 };
 
 const mostrarError = (error) => {
